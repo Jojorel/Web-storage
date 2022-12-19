@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPW2: Web Storage</title>
+</head>
+
+<body onload="load()">
+  <p id="text">Web storage</p>
+
+  <label for="color">Cor do fundo: </label>
+  <input type="color" id="color" onblur="changeColor()" />
+  <br />
+  <label for="font">Fonte do título do fundo: </label>
+  <!--
+      1 - Implemente um HTML select para trocar a fonte do texto Web Storage que, nesse projeto,
+      está contido em um parágrafo. Algumas regras devem ser observadas:
+
+        * O Identificador do HTML select (id) deve ser igual a "font"
+
+        * As opções do HTML select devem ser: Arial, Monaco e Bradley Hand
+    -->
+
+  <!-- ISSUE 1 -->
+
+  <select id=font onchange="changeFont()">
+    <option value="valor0">Selecione a Fonte</option>
+    <option value="valor1">Arial</option>
+    <option value="valor2">Monaco</option>
+    <option value="valor3">Bradley Hand</option>
+  </select>
+
+
+  <script>
+
+    function changeColor() {
+      let inputColor = document.getElementById("color");
+      document.body.style.backgroundColor = inputColor.value;
+
+      localStorage.setItem("color", inputColor.value);
+    }
+
+
+    function changeFont() {
+
+
+      let opfonte = document.querySelector("#font");
+
+
+      let valor_opfonte = opfonte.value;
+
+
+      let texto_trocar = document.getElementById("text")
+
+      switch (valor_opfonte) {
+        case "valor1":
+          console.log("ARIAL");
+          texto_trocar.style.fontFamily = "Arial";
+          break;
+
+        case "valor2":
+          console.log("MONACO");
+          texto_trocar.style.fontFamily = "Monaco";
+          break;
+
+        case "valor3":
+          console.log("BRADLEY HAND");
+          texto_trocar.style.fontFamily = "Bradley Hand";
+          break;
+      }
+
+      localStorage.setItem("text", texto_trocar.style.fontFamily);
+    }
+
+
+    function load() {
+      document.body.style.backgroundColor = localStorage.getItem("color");
+
+
+      let texto_trocar = document.getElementById("text");
+      texto_trocar.style.fontFamily = localStorage.getItem("text");
+
+    }
+
+
+  </script>
+</body>
+
+</html>
